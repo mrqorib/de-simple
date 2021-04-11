@@ -14,6 +14,8 @@ from params import Params
 from de_distmult import DE_DistMult
 from de_transe import DE_TransE
 from de_simple import DE_SimplE
+from de_complex import DE_ComplEx
+from de_rotate import DE_RotatE
 from tester import Tester
 
 class Trainer:
