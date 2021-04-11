@@ -30,6 +30,8 @@ class DE_TransE(torch.nn.Module):
         self.sigm = torch.nn.Sigmoid()
         self.tanh = nn.Tanh()
     
+        self.margin = params.margin
+
     def create_time_embedds(self):
             
         self.m_freq = nn.Embedding(self.dataset.numEnt(), self.params.t_emb_dim).cuda()
@@ -83,6 +85,6 @@ class DE_TransE(torch.nn.Module):
         
         scores = h_embs + r_embs - t_embs
         scores = F.dropout(scores, p=self.params.dropout, training=self.training)
-        scores = -torch.norm(scores, dim = 1)
+        scores = self.margin - torch.norm(scores, dim = 1)
         return scores
         
