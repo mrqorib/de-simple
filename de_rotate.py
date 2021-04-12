@@ -31,8 +31,7 @@ class DE_RotatE(torch.nn.Module):
         # code says -pi to pi, paper says 0 to 2* pi.
         nn.init.uniform_(self.ent_embs_h.weight, -math.pi, math.pi)
         nn.init.uniform_(self.ent_embs_t.weight, -math.pi, math.pi)
-        nn.init.uniform_(self.rel_embs_f.weight, -math.pi, math.pi)
-        nn.init.uniform_(self.rel_embs_i.weight, -math.pi, math.pi)
+        nn.init.uniform_(self.rel_embs.weight, -math.pi, math.pi)
     
     def create_time_embedds(self):
 
@@ -60,26 +59,26 @@ class DE_RotatE(torch.nn.Module):
         self.y_amps_h = nn.Embedding(self.dataset.numEnt(), self.params.t_emb_dim).cuda()
         self.y_amps_t = nn.Embedding(self.dataset.numEnt(), self.params.t_emb_dim).cuda()
 
-        nn.init.xavier_uniform_(self.m_freq_h.weight)
-        nn.init.xavier_uniform_(self.d_freq_h.weight)
-        nn.init.xavier_uniform_(self.y_freq_h.weight)
-        nn.init.xavier_uniform_(self.m_freq_t.weight)
-        nn.init.xavier_uniform_(self.d_freq_t.weight)
-        nn.init.xavier_uniform_(self.y_freq_t.weight)
+        nn.init.uniform_(self.m_freq_h.weight, -math.pi, math.pi)
+        nn.init.uniform_(self.d_freq_h.weight, -math.pi, math.pi)
+        nn.init.uniform_(self.y_freq_h.weight, -math.pi, math.pi)
+        nn.init.uniform_(self.m_freq_t.weight, -math.pi, math.pi)
+        nn.init.uniform_(self.d_freq_t.weight, -math.pi, math.pi)
+        nn.init.uniform_(self.y_freq_t.weight, -math.pi, math.pi)
 
-        nn.init.xavier_uniform_(self.m_phi_h.weight)
-        nn.init.xavier_uniform_(self.d_phi_h.weight)
-        nn.init.xavier_uniform_(self.y_phi_h.weight)
-        nn.init.xavier_uniform_(self.m_phi_t.weight)
-        nn.init.xavier_uniform_(self.d_phi_t.weight)
-        nn.init.xavier_uniform_(self.y_phi_t.weight)
+        nn.init_uniform_(self.m_phi_h.weight, -math.pi, math.pi)
+        nn.init_uniform_(self.d_phi_h.weight, -math.pi, math.pi)
+        nn.init_uniform_(self.y_phi_h.weight, -math.pi, math.pi)
+        nn.init_uniform_(self.m_phi_t.weight, -math.pi, math.pi)
+        nn.init_uniform_(self.d_phi_t.weight, -math.pi, math.pi)
+        nn.init_uniform_(self.y_phi_t.weight, -math.pi, math.pi)
 
-        nn.init.xavier_uniform_(self.m_amps_h.weight)
-        nn.init.xavier_uniform_(self.d_amps_h.weight)
-        nn.init.xavier_uniform_(self.y_amps_h.weight)
-        nn.init.xavier_uniform_(self.m_amps_t.weight)
-        nn.init.xavier_uniform_(self.d_amps_t.weight)
-        nn.init.xavier_uniform_(self.y_amps_t.weight)
+        nn.init.uniform_(self.m_amps_h.weight, -math.pi, math.pi)
+        nn.init.uniform_(self.d_amps_h.weight, -math.pi, math.pi)
+        nn.init.uniform_(self.y_amps_h.weight, -math.pi, math.pi)
+        nn.init.uniform_(self.m_amps_t.weight, -math.pi, math.pi)
+        nn.init.uniform_(self.d_amps_t.weight, -math.pi, math.pi)
+        nn.init.uniform_(self.y_amps_t.weight, -math.pi, math.pi)
 
     def get_time_embedd(self, entities, years, months, days, h_or_t):
         if h_or_t == "head":
@@ -116,16 +115,21 @@ class DE_RotatE(torch.nn.Module):
     def forward(self, heads, rels, tails, years, months, days):
         h_re, r_re, t_re, h_im, r_im, t_im = self.getEmbeddings(heads, rels, tails, years, months, days)
 
-        re_score = r_re * t_re + r_im * t_im
-        im_score = r_re * t_im - r_im * t_re
+        # re_score = r_re * t_re + r_im * t_im
+        # im_score = r_re * t_im - r_im * t_re
         
-        re_score = re_score - re_head
-        im_score = im_score - im_head
+        # re_score = re_score - h_re
+        # im_score = im_score - h_im
         
+        re_score = h_re * r_re - h_im * r_im
+        im_score = h_re * r_im + h_im * r_re
+        re_score = re_score - t_re
+        im_score = im_score - t_im
+
         score = torch.stack([re_score, im_score], dim = 0)
         score = score.norm(dim = 0)
         
-        scores = self.margin - torch.sum(scores, dim=1)
+        scores = self.margin - torch.sum(score, dim=1)
         
         return scores
         

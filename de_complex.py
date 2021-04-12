@@ -113,7 +113,7 @@ class DE_ComplEx(torch.nn.Module):
 
         re_score = r_re * t_re + r_im * t_im
         im_score = r_re * t_im - r_im * t_re
-        score = h_re * re_score + h_im * im_score
+        scores = h_re * re_score + h_im * im_score
         scores = torch.sum(scores, dim=1)
         
         return scores
