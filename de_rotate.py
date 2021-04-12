@@ -66,12 +66,12 @@ class DE_RotatE(torch.nn.Module):
         nn.init.uniform_(self.d_freq_t.weight, -math.pi, math.pi)
         nn.init.uniform_(self.y_freq_t.weight, -math.pi, math.pi)
 
-        nn.init_uniform_(self.m_phi_h.weight, -math.pi, math.pi)
-        nn.init_uniform_(self.d_phi_h.weight, -math.pi, math.pi)
-        nn.init_uniform_(self.y_phi_h.weight, -math.pi, math.pi)
-        nn.init_uniform_(self.m_phi_t.weight, -math.pi, math.pi)
-        nn.init_uniform_(self.d_phi_t.weight, -math.pi, math.pi)
-        nn.init_uniform_(self.y_phi_t.weight, -math.pi, math.pi)
+        nn.init.uniform_(self.m_phi_h.weight, -math.pi, math.pi)
+        nn.init.uniform_(self.d_phi_h.weight, -math.pi, math.pi)
+        nn.init.uniform_(self.y_phi_h.weight, -math.pi, math.pi)
+        nn.init.uniform_(self.m_phi_t.weight, -math.pi, math.pi)
+        nn.init.uniform_(self.d_phi_t.weight, -math.pi, math.pi)
+        nn.init.uniform_(self.y_phi_t.weight, -math.pi, math.pi)
 
         nn.init.uniform_(self.m_amps_h.weight, -math.pi, math.pi)
         nn.init.uniform_(self.d_amps_h.weight, -math.pi, math.pi)
