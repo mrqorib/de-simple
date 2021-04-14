@@ -29,8 +29,8 @@ class DE_RotatE(torch.nn.Module):
         self.margin = params.margin
         
         # code says -pi to pi, paper says 0 to 2* pi.
-        nn.init.uniform_(self.ent_embs_h.weight, -math.pi, math.pi)
-        nn.init.uniform_(self.ent_embs_t.weight, -math.pi, math.pi)
+        nn.init.uniform_(self.ent_embs_h.weight, -self.margin, self.margin)
+        nn.init.uniform_(self.ent_embs_t.weight, -self.margin, self.margin)
         nn.init.uniform_(self.rel_embs.weight, -math.pi, math.pi)
     
     def create_time_embedds(self):
@@ -59,26 +59,26 @@ class DE_RotatE(torch.nn.Module):
         self.y_amps_h = nn.Embedding(self.dataset.numEnt(), self.params.t_emb_dim).cuda()
         self.y_amps_t = nn.Embedding(self.dataset.numEnt(), self.params.t_emb_dim).cuda()
 
-        nn.init.uniform_(self.m_freq_h.weight, -math.pi, math.pi)
-        nn.init.uniform_(self.d_freq_h.weight, -math.pi, math.pi)
-        nn.init.uniform_(self.y_freq_h.weight, -math.pi, math.pi)
-        nn.init.uniform_(self.m_freq_t.weight, -math.pi, math.pi)
-        nn.init.uniform_(self.d_freq_t.weight, -math.pi, math.pi)
-        nn.init.uniform_(self.y_freq_t.weight, -math.pi, math.pi)
+        nn.init.uniform_(self.m_freq_h.weight, -self.margin, self.margin)
+        nn.init.uniform_(self.d_freq_h.weight, -self.margin, self.margin)
+        nn.init.uniform_(self.y_freq_h.weight, -self.margin, self.margin)
+        nn.init.uniform_(self.m_freq_t.weight, -self.margin, self.margin)
+        nn.init.uniform_(self.d_freq_t.weight, -self.margin, self.margin)
+        nn.init.uniform_(self.y_freq_t.weight, -self.margin, self.margin)
 
-        nn.init.uniform_(self.m_phi_h.weight, -math.pi, math.pi)
-        nn.init.uniform_(self.d_phi_h.weight, -math.pi, math.pi)
-        nn.init.uniform_(self.y_phi_h.weight, -math.pi, math.pi)
-        nn.init.uniform_(self.m_phi_t.weight, -math.pi, math.pi)
-        nn.init.uniform_(self.d_phi_t.weight, -math.pi, math.pi)
-        nn.init.uniform_(self.y_phi_t.weight, -math.pi, math.pi)
+        nn.init.uniform_(self.m_phi_h.weight, -self.margin, self.margin)
+        nn.init.uniform_(self.d_phi_h.weight, -self.margin, self.margin)
+        nn.init.uniform_(self.y_phi_h.weight, -self.margin, self.margin)
+        nn.init.uniform_(self.m_phi_t.weight, -self.margin, self.margin)
+        nn.init.uniform_(self.d_phi_t.weight, -self.margin, self.margin)
+        nn.init.uniform_(self.y_phi_t.weight, -self.margin, self.margin)
 
-        nn.init.uniform_(self.m_amps_h.weight, -math.pi, math.pi)
-        nn.init.uniform_(self.d_amps_h.weight, -math.pi, math.pi)
-        nn.init.uniform_(self.y_amps_h.weight, -math.pi, math.pi)
-        nn.init.uniform_(self.m_amps_t.weight, -math.pi, math.pi)
-        nn.init.uniform_(self.d_amps_t.weight, -math.pi, math.pi)
-        nn.init.uniform_(self.y_amps_t.weight, -math.pi, math.pi)
+        nn.init.uniform_(self.m_amps_h.weight, -self.margin, self.margin)
+        nn.init.uniform_(self.d_amps_h.weight, -self.margin, self.margin)
+        nn.init.uniform_(self.y_amps_h.weight, -self.margin, self.margin)
+        nn.init.uniform_(self.m_amps_t.weight, -self.margin, self.margin)
+        nn.init.uniform_(self.d_amps_t.weight, -self.margin, self.margin)
+        nn.init.uniform_(self.y_amps_t.weight, -self.margin, self.margin)
 
     def get_time_embedd(self, entities, years, months, days, h_or_t):
         if h_or_t == "head":
