@@ -22,11 +22,11 @@ class DE_RotatE(torch.nn.Module):
         self.ent_embs_t = nn.Embedding(dataset.numEnt(), params.s_emb_dim).cuda()
         self.rel_embs = nn.Embedding(dataset.numRel(), params.s_emb_dim+params.t_emb_dim).cuda()
         
+        self.margin = params.margin
+        
         self.create_time_embedds()
 
         self.time_nl = torch.sin
-
-        self.margin = params.margin
         
         # code says -pi to pi, paper says 0 to 2* pi.
         nn.init.uniform_(self.ent_embs_h.weight, -self.margin, self.margin)
