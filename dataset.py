@@ -42,7 +42,7 @@ class Dataset:
     def readFile(self, 
                  filename):
 
-        with open(filename, "r") as f:
+        with open(filename, "r", encoding='utf-8') as f:
             data = f.readlines()
         
         facts = []
