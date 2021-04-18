@@ -6,7 +6,10 @@ This repository is an extension of the [original repository](https://github.com/
 ## Diachronic Embedding
 The entity  embeddings  is  a  function  of  the  entity  feature & the timestamp
 Combines the static vector representation from any kind  of  static  knowledge  graph  embedding  method,  with time-specific  vector  representation
+
 ![equation](https://latex.codecogs.com/gif.latex?z_v%5Et%20%3D%20%5Cbegin%7Bcases%7D%20a_v%5Et%5Bn%5D%5Csigma%28w_v%5Bn%5D%5Ctimes%20t%20&plus;%20b_v%5Bn%5D%29%20%26%5Ctext%7Bif%20%7D%201%20%5Cleq%20n%20%5Cleq%20%5Cgamma%20d%20%5C%5C%20a_v%5Bn%5D%20%26%5Ctext%7Bif%20%7D%20%5Cgamma%20d%20%3C%20n%20%5Cleq%20d%20%5Cend%7Bcases%7D)
+
+
 ![diachronic embedding](images/de_detail.jpg)
 
 ## Results
