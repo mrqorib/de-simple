@@ -20,13 +20,15 @@ Test results on ICEWS14 is as follows. Due to resource limitations, InteractE wa
 | DE_ConvE | 0.2454 | 0.1472 | 0.2591 | 0.449 |
 | DE_InteractE | 0.0083 | 0.0306 | 0.078 | 0.1402 |
 
+From the result, we can see that DE_SimplE is still the highest and DE_RotatE, DE_ConvE, and DE_InteractE are unexpectedly have low performance.
+
 Validation results over training are as follows.
 
-![validation per epoch](https://github.com/mrqorib/de-simple/blob/master/images/mrr.jpg)
+![validation per epoch](https://github.com/mrqorib/de-simple/blob/master/images/mrr.png)
 
 As seen, ComplEx seems to perform well on earlier epochs but its performance decreases over time, which may be a sign of overfitting. Meanwhile, RotatE, ConvE, and InteractE doesn't seem to work as well as expected.
 
-![rotate](https://github.com/mrqorib/de-simple/blob/master/images/mrr_rotate.jpg)
+![rotate](https://github.com/mrqorib/de-simple/blob/master/images/mrr_rotate.png)
 
 RotatE doesn't seem to only work well with high embedding dimensions and with self-supervised training.
 
