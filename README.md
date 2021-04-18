@@ -7,7 +7,7 @@ This repository is an extension of the [original repository](https://github.com/
 The entity  embeddings  is  a  function  of  the  entity  feature & the timestamp
 Combines the static vector representation from any kind  of  static  knowledge  graph  embedding  method,  with time-specific  vector  representation
 ![equation](https://latex.codecogs.com/gif.latex?z_v%5Et%20%3D%20%5Cbegin%7Bcases%7D%20a_v%5Et%5Bn%5D%5Csigma%28w_v%5Bn%5D%5Ctimes%20t%20&plus;%20b_v%5Bn%5D%29%20%26%5Ctext%7Bif%20%7D%201%20%5Cleq%20n%20%5Cleq%20%5Cgamma%20d%20%5C%5C%20a_v%5Bn%5D%20%26%5Ctext%7Bif%20%7D%20%5Cgamma%20d%20%3C%20n%20%5Cleq%20d%20%5Cend%7Bcases%7D)
-![diachronic embedding](https://github.com/mrqorib/de-simple/blob/master/images/de_detail.jpg)
+![diachronic embedding](images/de_detail.jpg)
 
 ## Results
 Test results on ICEWS14 is as follows. Due to resource limitations, InteractE was run only for 200 epochs.
@@ -24,15 +24,15 @@ From the result, we can see that DE_SimplE is still the highest and DE_RotatE, D
 
 Validation results over training are as follows.
 
-![validation per epoch](https://github.com/mrqorib/de-simple/blob/master/images/mrr.png)
+![validation per epoch](images/mrr.png)
 
 As seen, ComplEx seems to perform well on earlier epochs but its performance decreases over time, which may be a sign of overfitting. Meanwhile, RotatE, ConvE, and InteractE doesn't seem to work as well as expected.
 
-![rotate](https://github.com/mrqorib/de-simple/blob/master/images/mrr_rotate.png)
+![rotate](images/mrr_rotate.png)
 
 RotatE doesn't seem to only work well with high embedding dimensions and with self-supervised training.
 
-![conve](https://github.com/mrqorib/de-simple/blob/master/images/loss_conve_interacte.png)
+![conve](images/loss_conve_interacte.png)
 
 ConvE and InteractE does not converge yet after training (500 epochs for ConvE and 200 epochs for InteractE), so the test results may not be good. This may be due to the training method not performing well for models with large number of parameters.
 
